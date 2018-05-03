@@ -97,7 +97,14 @@ $show_complete_tasks = rand(0, 1);
 
                     <label class="checkbox">
                         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
-                        <input class="checkbox__input visually-hidden show_completed" type="checkbox">
+                         <? if ($show_complete_tasks == 1) {
+                            $checked = "cheked";
+                         } elseif($show_complete_tasks == 0) {
+                            $checked = "";
+                         }
+                         // endif; 
+                         ?>
+                        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?=$checked?>  >
                         <span class="checkbox__text">Показывать выполненные</span>
                     </label>
                 </div>
@@ -118,6 +125,26 @@ $show_complete_tasks = rand(0, 1);
                         <td class="task__date"></td>
                     </tr>
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
+                    <? if ($show_complete_tasks == 1) {
+                        ?>
+                        <tr class="tasks__item task task--completed">
+                            <td class="task__select">
+                                <label class="checkbox task__checkbox">
+                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" checked>
+                                    <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
+                                </label>
+                            </td>
+
+                            <td class="task__file">
+                                <a class="download-link" href="#">Home.psd</a>
+                            </td>
+
+                            <td class="task__date"></td>
+                        </tr>
+                        <?
+                         } 
+                         // endif; 
+                    ?>
                     <tr class="tasks__item task task--completed">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
