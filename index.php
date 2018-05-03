@@ -1,6 +1,18 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+$simple_array = ["Все", "Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
+// $difficult_array = [
+//     'Задача' => ["Собеседование в IT компании", "Выполнить тестовое задание", "Сделать задание первого раздела", "Встреча с другом", "Купить корм для кота", "Заказать пиццу"],
+//     'Дата выполнения' => ["01.06.2018", "25.05.2018", "21.04.2018","22.04.2018", "Нет", "Нет"],
+//     'Категория' => ["Работа", "Работа", "Учеба", "Входящие", "Домашние дела ", "Домашние дела "], 
+//     'Выполнен' => ["N", "N", "Y", "N", "N", "N"] 
+// ];
+?>
+<pre>
+  <? print_r($difficult_array); ?> 
+</pre>
+<?
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -46,8 +58,34 @@ $show_complete_tasks = rand(0, 1);
                 <h2 class="content__side-heading">Проекты</h2>
 
                 <nav class="main-navigation">
+                    <!-- ===3====== -->
                     <ul class="main-navigation__list">
-                        <li class="main-navigation__list-item">
+                    <?
+                    // echo count($simple_array);
+                    $index_item = 0;
+                        while ($index_item  < count($simple_array)) {
+                           
+                            $index_item = $index_item + 1;
+
+                            if ( $index_item == 1) {
+                                $active = "main-navigation__list-item--active"; 
+                            } else {
+                                $active = "";
+                            }
+
+                            ?>
+                            
+                            <li class="main-navigation__list-item <?=$active?>">
+                                <a class="main-navigation__list-item-link" href="#"><?=$simple_array[$index_item]?></a>
+                                <span class="main-navigation__list-item-count">4</span>
+                            </li>
+                            <?
+                        }
+
+                    ?>
+
+
+<!--                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#">Входящие</a>
                             <span class="main-navigation__list-item-count">24</span>
                         </li>
@@ -70,8 +108,9 @@ $show_complete_tasks = rand(0, 1);
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#">Авто</a>
                             <span class="main-navigation__list-item-count">0</span>
-                        </li>
+                        </li> -->
                     </ul>
+                    <!-- ====3====== -->
                 </nav>
 
                 <a class="button button--transparent button--plus content__side-button open-modal"
@@ -101,9 +140,56 @@ $show_complete_tasks = rand(0, 1);
                         <span class="checkbox__text">Показывать выполненные</span>
                     </label>
                 </div>
+                
 
+                <?
+                $difficult_array = [
+                    'task' => ["Собеседование в IT компании", "Выполнить тестовое задание", "Сделать задание первого раздела", "Встреча с другом", "Купить корм для кота", "Заказать пиццу"],
+                    'date' => ["01.06.2018", "25.05.2018", "21.04.2018","22.04.2018", "Нет", "Нет"],
+                    'category' => ["Работа", "Работа", "Учеба", "Входящие", "Домашние дела ", "Домашние дела "], 
+                    'done' => ["N", "N", "Y", "N", "Y", "N"] 
+                ];
+
+                ?>
                 <table class="tasks">
-                    <tr class="tasks__item task">
+
+                    <?
+                    $i = 0;
+                     // print($difficult_array['task'][0]);
+                    foreach ($difficult_array as $key => $value) {
+                        //echo "{$key} => {$value} ";
+                        //print_r($arr);
+                        $i++;
+                        if ($difficult_array['done'][$i] == 'Y') {
+                            $complete = "task--completed";
+                        } else{
+                            $complete = "";
+                        }
+                        ?>
+                        <tr class="tasks__item task <?=$complete?>">
+                            <td class="task__select">
+                                <label class="checkbox task__checkbox">
+                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                    <span class="checkbox__text">
+                                        <? print($difficult_array['task'][$i]); ?>                                            
+                                    </span>
+                                </label>
+                            </td>
+
+                            <td class="task__file">
+                                <a class="download-link" href="#">Home.psd</a>
+                            </td>
+
+                            <td class="task__date">
+                                <? print($difficult_array['date'][$i]); ?> 
+                            </td>
+                        </tr>
+                        <?
+                    }
+
+
+                    ?>
+             <!--        <tr class="tasks__item task">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
@@ -115,10 +201,10 @@ $show_complete_tasks = rand(0, 1);
                             <a class="download-link" href="#">Home.psd</a>
                         </td>
 
-                        <td class="task__date"></td>
+                        <td class="task__date">1</td>
                     </tr>
-                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
-                    <tr class="tasks__item task task--completed">
+ -->                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
+         <!--            <tr class="tasks__item task task--completed">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" checked>
@@ -131,8 +217,10 @@ $show_complete_tasks = rand(0, 1);
                         </td>
 
                         <td class="task__date"></td>
-                    </tr>
+                    </tr> -->
                 </table>
+
+
             </main>
         </div>
     </div>
